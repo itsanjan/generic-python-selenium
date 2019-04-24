@@ -1,10 +1,18 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
+import os
+
+ENV_CWD = os.getcwd()
+OUTPUT_LOG_SELENIUM = ENV_CWD + '\output' + '\selenium.log'
+print(OUTPUT_LOG_SELENIUM)
+TEST_EXECUTION_BROWSER = 'chrome'
+
+print(OUTPUT_LOG_SELENIUM)
 def create_selenium_driver(browser='chrome'):
     if browser == 'chrome':
         return webdriver.Chrome(
-            service_args=["--verbose", "--log-path=selenium.log"]
+            service_args=["--verbose", "--log-path="+OUTPUT_LOG_SELENIUM]
         )
     elif browser == 'firefox':
         return webdriver.Firefox()
@@ -20,7 +28,7 @@ def create_selenium_driver(browser='chrome'):
         msg = 'Selenium driver for browser %s is not available' % browser
         raise RuntimeError(msg) 
 
-driver = create_selenium_driver()
+driver = create_selenium_driver(TEST_EXECUTION_BROWSER)
 driver.get("http://www.python.org")
 assert "Python" in driver.title
 elem = driver.find_element_by_name("q")
