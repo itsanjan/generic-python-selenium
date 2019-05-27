@@ -26,7 +26,7 @@ def create_selenium_driver(browser='chrome'):
         return webdriver.PhantomJS()
     else:
         msg = 'Selenium driver for browser %s is not available' % browser
-        raise RuntimeError(msg) 
+        raise RuntimeError(msg)
 
 driver = create_selenium_driver(TEST_EXECUTION_BROWSER)
 driver.get("http://www.python.org")
@@ -37,5 +37,3 @@ elem.send_keys("pycon")
 elem.send_keys(Keys.RETURN)
 assert "No results found." not in driver.page_source
 driver.close()
-
-
